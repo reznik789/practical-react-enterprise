@@ -2,17 +2,27 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { Store } from '@reduxjs/toolkit';
-import { ThemeProvider } from '../ThemeProvider';
+import { ThemeProvider, Theme } from '../ThemeProvider';
+import { StyledEngineProvider } from '@mui/system';
 import { configureAppStore } from 'store/configureStore';
 import { useTheme } from 'styled-components';
 import { selectTheme } from '../slice/selectors';
 
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
+
 const renderThemeProvider = (store: Store, Child: React.FunctionComponent) =>
   render(
     <Provider store={store}>
-      <ThemeProvider>
-        <Child />
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider>
+          <Child />
+        </ThemeProvider>
+      </StyledEngineProvider>
     </Provider>,
   );
 

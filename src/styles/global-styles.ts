@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import { StyleConstants } from './StyleConstants';
 /* istanbul ignore next */
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -11,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: ${p => p.theme.background};
+    background-color: white;
   }
 
   body.fontLoaded {

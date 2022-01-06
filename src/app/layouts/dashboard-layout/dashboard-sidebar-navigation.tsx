@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Toolbar from '@material-ui/core/Toolbar';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import Drawer from '@mui/material/Drawer';
+import Toolbar from '@mui/material/Toolbar';
 import { useRouteMatch } from 'react-router';
-import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import SettingsIcon from '@material-ui/icons/Settings';
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import SettingsIcon from '@mui/icons-material/Settings';
+import { CSSProperties } from '@mui/styles';
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme =>
@@ -24,7 +26,7 @@ const useStyles = makeStyles(theme =>
     drawerContainer: {
       overflow: 'auto',
     },
-    toolbar: theme.mixins.toolbar,
+    toolbar: (theme.mixins as CSSProperties).toolbar as CSSProperties,
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),

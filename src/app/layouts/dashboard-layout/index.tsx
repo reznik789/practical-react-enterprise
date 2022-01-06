@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 import DashboardSidebarNavigation from './dashboard-sidebar-navigation';
 interface Props {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ const Dashboard = ({ children }: Props) => {
     <Grid
       container
       direction="row"
-      justify="flex-start"
+      justifyContent="flex-start"
       alignItems="flex-start"
     >
       <DashboardSidebarNavigation /> {children}

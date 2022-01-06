@@ -9,7 +9,7 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
-import { Container } from '@material-ui/core';
+import { Container } from '@mui/material';
 import { GlobalStyle } from '../styles/global-styles';
 import { useTranslation } from 'react-i18next';
 import Routes from './routes';

@@ -4,7 +4,7 @@ import Home from './views/pages/Home';
 import NotFoundPage from './views/pages/NotFoundPage';
 import Dashboard from './layouts/dashboard-layout';
 import SettingsAndPrivacy from './views/dashboard/settings-and-privacy';
-import { LinearProgress } from '@material-ui/core';
+import { LinearProgress } from '@mui/material';
 const AboutPage = lazy(() => import('./views/pages/About'));
 const DashboardDefaultContent = lazy(
   () => import('./views/dashboard/dashboard-default-content'),
