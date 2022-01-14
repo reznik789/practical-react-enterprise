@@ -43,6 +43,7 @@ const openSansObserver = new FontFaceObserver('Inter', {});
 openSansObserver.load().then(() => {
   document.body.classList.add('fontLoaded');
 });
+// @material-ui/core @material-ui/icons @material-ui/lab @material-ui/pickers @material-ui/styles
 
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
