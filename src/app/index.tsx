@@ -13,6 +13,7 @@ import { GlobalStyle } from '../styles/global-styles';
 import { useTranslation } from 'react-i18next';
 import Routes from './routes';
 import MainLayout from './layouts/main-layout';
+import { SnackbarProvider } from 'notistack';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -25,10 +26,12 @@ export function App() {
       >
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
-      <MainLayout>
-        <Routes />
-      </MainLayout>
-      <GlobalStyle />
+      <SnackbarProvider>
+        <MainLayout>
+          <Routes />
+        </MainLayout>
+        <GlobalStyle />
+      </SnackbarProvider>
     </BrowserRouter>
   );
 }

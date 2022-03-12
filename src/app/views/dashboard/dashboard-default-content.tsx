@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Theme } from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import { SaleType } from 'models/sale-type';
-import { getSalesAxios } from 'services/saleService';
+import { getSalesList } from 'services/saleService';
 import { useTheme } from '@mui/system';
 import Chart from 'react-apexcharts';
 import {
@@ -104,7 +104,7 @@ const DashboardDefaultContent = () => {
   useEffect(() => {
     let isMounted = true;
     const loadSales = async () => {
-      const { data: sales } = await getSalesAxios();
+      const { data: sales } = await getSalesList();
       isMounted && setSales(sales);
     };
     loadSales();

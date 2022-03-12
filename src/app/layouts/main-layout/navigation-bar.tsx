@@ -15,7 +15,8 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      display: 'flex',
+      flex: '0 1',
     },
     menuButton: {
       marginRight: theme.spacing(2),

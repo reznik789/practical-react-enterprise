@@ -9,12 +9,12 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     overflow: 'hidden',
     width: '100%',
+    flexDirection: 'column',
   },
   wrapper: {
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
-    paddingTop: 64,
   },
   contentContainer: {
     display: 'flex',
@@ -22,7 +22,6 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
   },
   content: {
-    backgroundColor: theme.palette.background.default,
     flex: '1 1 auto',
     height: '100%',
     overflow: 'auto',

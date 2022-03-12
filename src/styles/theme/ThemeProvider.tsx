@@ -1,11 +1,21 @@
 import * as React from 'react';
 import { ThemeProvider as OriginalThemeProvider } from '@mui/styles';
-import { Theme } from '@mui/system';
-import { createTheme } from '@mui/material';
+import { Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface DefaultTheme extends Theme {}
+  export interface DefaultTheme extends Theme {
+    zIndex: {
+      mobileStepper: number;
+      speedDial: number;
+      appBar: number;
+      drawer: number;
+      modal: number;
+      snackbar: number;
+      tooltip: number;
+    };
+  }
 }
 export const ColorModeContext = React.createContext<{
   toggleColorMode: () => void;
@@ -24,6 +34,15 @@ export const ThemeProvider = (props: { children: React.ReactChild }) => {
       createTheme({
         palette: {
           mode,
+        },
+        zIndex: {
+          mobileStepper: 1000,
+          speedDial: 1050,
+          appBar: 1100,
+          drawer: 1200,
+          modal: 1300,
+          snackbar: 1400,
+          tooltip: 1500,
         },
       }),
     [mode],

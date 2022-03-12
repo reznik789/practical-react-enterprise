@@ -3,5 +3,8 @@ import axios from 'axios';
 requests*/
 /*JSON Server has CORS Policy by default*/
 const api = axios.create({ baseURL: 'http://localhost:5000/' });
-export const EndPoints = { sales: 'sales' };
+export const EndPoints = {
+  sales: 'sales',
+  products: 'products',
+};
 export default api;

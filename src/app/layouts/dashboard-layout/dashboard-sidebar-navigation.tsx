@@ -1,14 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
 import { useRouteMatch } from 'react-router';
-import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { CSSProperties } from '@mui/styles';
+import {
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+  Divider,
+  Collapse,
+} from '@mui/material';
+import PieChartIcon from '@mui/icons-material/PieChartOutline';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ListIcon from '@mui/icons-material/List';
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme =>
@@ -26,7 +38,7 @@ const useStyles = makeStyles(theme =>
     drawerContainer: {
       overflow: 'auto',
     },
-    toolbar: (theme.mixins as CSSProperties).toolbar as CSSProperties,
+    toolbar: theme.mixins.toolbar,
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
@@ -38,13 +50,23 @@ const useStyles = makeStyles(theme =>
       textDecoration: 'none',
       color: 'inherit',
     },
+    nested: {
+      paddingLeft: theme.spacing(4),
+    },
   }),
 );
 
 const DashboardSidebarNavigation = () => {
   const classes = useStyles();
   const { url } = useRouteMatch();
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {}, []);
+
+  const toggleMenu = () => {
+    setOpen(openState => !openState);
+  };
+
   return (
     <div className={classes.root}>
       <Drawer
@@ -63,20 +85,50 @@ const DashboardSidebarNavigation = () => {
             Logo
           </Link>
         </Toolbar>
+        <Divider />
         <div className={classes.drawerContainer}>
           <List>
-            <Link className={classes.link} to={`${url}/settings-and-privacy`}>
+            <ListSubheader>Reports</ListSubheader>
+            <Link className={classes.link} to={`${url}`}>
               <ListItem button>
                 <ListItemIcon>
-                  <SettingsIcon />
+                  <PieChartIcon />
                 </ListItemIcon>
-                <ListItemText primary={'settings and privacy'} />
+                <ListItemText primary={'Dashboard'} />
               </ListItem>
             </Link>
+            <ListSubheader>Management</ListSubheader>
+            <ListItem button onClick={toggleMenu}>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Products" />
+              {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <Link className={classes.link} to={`${url}/list-products`}>
+                  <ListItem button className={classes.nested}>
+                    <ListItemIcon>
+                      <ListIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="List Products" />
+                  </ListItem>
+                </Link>
+                <Link className={classes.link} to={`${url}/create-product`}>
+                  <ListItem button className={classes.nested}>
+                    <ListItemIcon>
+                      <UploadFileIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Create Product" />
+                  </ListItem>
+                </Link>
+              </List>
+            </Collapse>
             <a className={classes.link} href={'/'}>
               <ListItem button>
                 <ListItemIcon>
-                  <ExitToAppIcon />
+                  <LogoutIcon />
                 </ListItemIcon>
                 <ListItemText primary={'logout'} />
               </ListItem>

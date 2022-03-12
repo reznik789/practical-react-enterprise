@@ -3,8 +3,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './views/pages/Home';
 import NotFoundPage from './views/pages/NotFoundPage';
 import Dashboard from './layouts/dashboard-layout';
-import SettingsAndPrivacy from './views/dashboard/settings-and-privacy';
 import { LinearProgress } from '@mui/material';
+
 const AboutPage = lazy(() => import('./views/pages/About'));
 const DashboardDefaultContent = lazy(
   () => import('./views/dashboard/dashboard-default-content'),
@@ -25,9 +25,18 @@ const Routes = () => {
                   component={DashboardDefaultContent}
                 />
                 <Route
+                  path={path + '/list-products'}
+                  component={lazy(
+                    () => import('./views/dashboard/product/ProductListView'),
+                  )}
                   exact
-                  path={path + '/settings-and-privacy'}
-                  component={SettingsAndPrivacy}
+                />
+                <Route
+                  path={path + '/create-product'}
+                  component={lazy(
+                    () => import('./views/dashboard/product/ProductCreateView'),
+                  )}
+                  exact
                 />
               </Switch>
             </Dashboard>

@@ -1,7 +1,7 @@
 import api, { EndPoints } from 'api/axios';
 import { SaleType } from 'models/sale-type';
 
-export async function getSalesAxios() {
+export async function getSalesList() {
   return await api.get<SaleType[]>(EndPoints.sales);
 }
 /* Other commonly-used api methods:
