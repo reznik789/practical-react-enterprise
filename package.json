@@ -102,9 +102,6 @@
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",
     "backend": "json-server --watch db.json --port 5000 --delay=1000"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

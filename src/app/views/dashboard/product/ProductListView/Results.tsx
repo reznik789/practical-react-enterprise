@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import clsx from 'clsx';
 import numeral from 'numeral';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -22,6 +22,7 @@ import {
   TablePagination,
   TableRow,
   TextField,
+  CircularProgress,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import {
@@ -36,7 +37,6 @@ import {
   getInventoryLabel,
 } from './TableResultsHelpers';
 import { ProductType } from 'models/product-type';
-import { deleteProduct } from 'services/productService';
 
 type Props = {
   className?: string;
@@ -90,7 +90,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Results: React.FC<Props> = ({ className, products = [], ...rest }) => {
+const Results: React.FC<Props> = ({
+  className,
+  products = [],
+  deleteProducts,
+  ...rest
+}) => {
   const classes = useStyles();
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [page, setPage] = useState(0);
@@ -103,6 +108,14 @@ const Results: React.FC<Props> = ({ className, products = [], ...rest }) => {
     inStock: null,
     isShippable: null,
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    const ids = products.map(({ id }) => id);
+    setSelectedProducts(prevSelected =>
+      prevSelected.filter(id => ids.includes(id)),
+    );
+  }, [products]);
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setQuery(event.target.value);
@@ -190,8 +203,9 @@ const Results: React.FC<Props> = ({ className, products = [], ...rest }) => {
   };
 
   const handleDelete = async () => {
-    const promises = selectedProducts.map(prodId => deleteProduct(prodId));
-    const result = await Promise.allSettled(promises);
+    setIsLoading(true);
+    await deleteProducts(selectedProducts);
+    setIsLoading(false);
   };
   /* Usually query is done on the backend with indexing solutions, but
 we're doing it  here just to simulate it */
@@ -304,8 +318,12 @@ we're doing it  here just to simulate it */
               indeterminate={selectedSomeProducts}
               onChange={handleSelectAllProducts}
             />
-            <Button variant="outlined" className={classes.bulkAction}>
-              Delete
+            <Button
+              variant="outlined"
+              className={classes.bulkAction}
+              onClick={handleDelete}
+            >
+              {isLoading ? <CircularProgress size={16} /> : <span>Delete</span>}
             </Button>
             <Button variant="outlined" className={classes.bulkAction}>
               Edit
