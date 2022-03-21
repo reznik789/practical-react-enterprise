@@ -65,7 +65,7 @@ const ProductListView = () => {
         <Header />
         {products && (
           <Box mt={3}>
-            <Results products={products} deleteProducts={deleteProducts}/>
+            <Results products={products} deleteProducts={deleteProducts} />
           </Box>
         )}
         <Backdrop

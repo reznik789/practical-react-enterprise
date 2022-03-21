@@ -21,6 +21,7 @@ import ListIcon from '@mui/icons-material/List';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CalendarMonthIcon from '@mui/icons-material/CalendarViewMonth';
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme =>
@@ -105,6 +106,15 @@ const DashboardSidebarNavigation = () => {
               <ListItemText primary="Products" />
               {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </ListItem>
+            <ListSubheader>Applications</ListSubheader>
+            <Link className={classes.link} to={`${url}/calendar`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <CalendarMonthIcon />
+                </ListItemIcon>
+                <ListItemText primary="Calendar" />
+              </ListItem>
+            </Link>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <Link className={classes.link} to={`${url}/list-products`}>

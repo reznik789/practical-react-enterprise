@@ -8,70 +8,50 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'react-quill/dist/quill.snow.css';
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import FontFaceObserver from 'fontfaceobserver';
-
-// Use consistent styling
-import 'sanitize.css/sanitize.css';
-
-import { App } from 'app';
-
-import { HelmetProvider } from 'react-helmet-async';
-
-import { configureAppStore } from 'store/configureStore';
-
 import { ThemeProvider } from 'styles/theme/ThemeProvider';
-
-import reportWebVitals from 'reportWebVitals';
-
+// import * as serviceWorker from 'serviceWorker';
+import 'sanitize.css/sanitize.css';
+// Import root app
+import { App } from 'app';
+import { HelmetProvider } from 'react-helmet-async';
+import { configureAppStore } from 'store/configureStore';
 // Initialize languages
 import './locales/i18n';
-import { StyledEngineProvider } from '@mui/system';
-
-declare module '@mui/styles/defaultTheme' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme {}
-}
-
-// Observe loading of Inter (to remove 'Inter', remove the <link> tag in
-// the index.html file and this observer)
-const openSansObserver = new FontFaceObserver('Inter', {});
-
-// When Inter is loaded, add a font-family using Inter to the body
-openSansObserver.load().then(() => {
-  document.body.classList.add('fontLoaded');
-});
-// @material-ui/core @material-ui/icons @material-ui/lab @material-ui/pickers @material-ui/styles
-
 const store = configureAppStore();
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
+interface Props {
+  Component: typeof App;
+}
+/*wrapping the root component inside a provider gives all the component an
+access to the provider component or the whole application */
 
-ReactDOM.render(
+const ConnectedApp = ({ Component }: Props) => (
   <Provider store={store}>
-    <StyledEngineProvider injectFirst>
-      <ThemeProvider>
-        <HelmetProvider>
-          <React.StrictMode>
-            <App />
-          </React.StrictMode>
-        </HelmetProvider>
-      </ThemeProvider>
-    </StyledEngineProvider>
-  </Provider>,
-  MOUNT_NODE,
+    <ThemeProvider>
+      <HelmetProvider>
+        <Component />
+      </HelmetProvider>
+    </ThemeProvider>
+  </Provider>
 );
-
-// Hot reloadable translation json files
+const render = (Component: typeof App) => {
+  ReactDOM.render(<ConnectedApp Component={Component} />, MOUNT_NODE);
+};
 if (module.hot) {
-  module.hot.accept(['./locales/i18n'], () => {
-    // No need to render the App again because i18next works with the hooks
+  // Hot reloadable translation json files and app
+  // modules.hot.accept does not accept dynamic dependencies,
+  // have to be constants at compile-time
+  module.hot.accept(['./app', './locales/i18n'], () => {
+    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+    const App = require('./app').App;
+    render(App);
   });
 }
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+render(App);
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+// serviceWorker.unregister();

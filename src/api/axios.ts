@@ -6,5 +6,6 @@ const api = axios.create({ baseURL: 'http://localhost:5000/' });
 export const EndPoints = {
   sales: 'sales',
   products: 'products',
+  events: 'events',
 };
 export default api;

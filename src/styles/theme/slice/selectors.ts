@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 
-import { RootState } from 'types';
+import { RootState } from 'store/reducers';
 import { initialState } from '.';
 import { themes } from '../themes';
 import { isSystemDark } from '../utils';
