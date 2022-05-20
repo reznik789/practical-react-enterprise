@@ -34,6 +34,9 @@ export const ThemeProvider = (props: { children: React.ReactChild }) => {
       createTheme({
         palette: {
           mode,
+          background: {
+            paper: '#000000',
+          },
         },
         zIndex: {
           mobileStepper: 1000,

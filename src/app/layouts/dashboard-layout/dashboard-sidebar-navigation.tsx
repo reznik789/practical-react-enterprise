@@ -106,15 +106,6 @@ const DashboardSidebarNavigation = () => {
               <ListItemText primary="Products" />
               {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </ListItem>
-            <ListSubheader>Applications</ListSubheader>
-            <Link className={classes.link} to={`${url}/calendar`}>
-              <ListItem button>
-                <ListItemIcon>
-                  <CalendarMonthIcon />
-                </ListItemIcon>
-                <ListItemText primary="Calendar" />
-              </ListItem>
-            </Link>
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
                 <Link className={classes.link} to={`${url}/list-products`}>
@@ -135,6 +126,15 @@ const DashboardSidebarNavigation = () => {
                 </Link>
               </List>
             </Collapse>
+            <ListSubheader>Applications</ListSubheader>
+            <Link className={classes.link} to={`${url}/calendar`}>
+              <ListItem button>
+                <ListItemIcon>
+                  <CalendarMonthIcon />
+                </ListItemIcon>
+                <ListItemText primary="Calendar" />
+              </ListItem>
+            </Link>
             <a className={classes.link} href={'/'}>
               <ListItem button>
                 <ListItemIcon>

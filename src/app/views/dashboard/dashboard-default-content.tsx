@@ -3,7 +3,7 @@ import { Theme } from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import { SaleType } from 'models/sale-type';
 import { getSalesList } from 'services/saleService';
-import { useTheme } from '@mui/system';
+import { useTheme } from '@mui/styles';
 import Chart from 'react-apexcharts';
 import {
   Box,
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 
 const getChartStyling = (theme: Theme) => ({
   chart: {
-    background: theme.palette.background.paper,
+    background: theme.palette.background.default,
     toolbar: {
       show: false,
     },
