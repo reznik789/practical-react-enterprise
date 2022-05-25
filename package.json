@@ -96,6 +96,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:fullstack": "concurrently \"npm run backend\" \"npm run start\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:prod": "yarn run build && serve -s build",
@@ -105,7 +106,7 @@
     "lint:fix": "yarn run eslint --fix src",
     "lint:css": "stylelint src/**/*.css",
     "prettify": "prettier --write",
-    "backend": "json-server --watch db.json --port 5000 --delay=1000"
+    "backend": "json-server --watch db.json --port 5000 --delay=1000 -m ./node_modules/json-server-auth"
   },
   "browserslist": {
     "production": [

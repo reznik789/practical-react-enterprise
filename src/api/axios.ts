@@ -7,5 +7,7 @@ export const EndPoints = {
   sales: 'sales',
   products: 'products',
   events: 'events',
+  login: 'login',
+  register: 'register',
 };
 export default api;

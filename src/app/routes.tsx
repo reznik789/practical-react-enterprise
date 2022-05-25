@@ -4,6 +4,7 @@ import Home from './views/pages/Home';
 import NotFoundPage from './views/pages/NotFoundPage';
 import Dashboard from './layouts/dashboard-layout';
 import { LinearProgress } from '@mui/material';
+import ProtectedRoute from './components/protected-routes';
 
 const AboutPage = lazy(() => import('./views/pages/About'));
 const DashboardDefaultContent = lazy(
@@ -14,7 +15,7 @@ const Routes = () => {
   return (
     <Suspense fallback={<LinearProgress style={{ margin: '10rem' }} />}>
       <Switch>
-        <Route
+        <ProtectedRoute
           path={'/dashboard'}
           render={({ match: { path } }) => (
             <Dashboard>
@@ -48,6 +49,11 @@ const Routes = () => {
               </Switch>
             </Dashboard>
           )}
+        />
+        <Route
+          exact
+          path={'/login'}
+          component={lazy(() => import('./views/pages/auth/LoginPage'))}
         />
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={AboutPage} />
